@@ -17,13 +17,14 @@ connection.once('open', async () => {
     };
 
     const users = getUsers();
-    const thoughts = getRandomThoughts(15);
+    // const thoughts = getRandomThoughts(15);
 
     await User.collection.insertMany(users);
-    await Thought.collection.insertMany(thoughts);
+    // await Thought.collection.insertMany(thoughts);
+    // create a single thought to get this shit started
 
-    console.table(users);
-    console.table(thoughts);
-    console.log('Successfully seeded');
+    // console.table(users);
+    // console.table(thoughts);
+    console.log('Successfully seeded!');
     process.exit(0);
 });
