@@ -23,10 +23,7 @@ connection.once('open', async () => {
     await Thought.collection.insertMany(thoughts);
 
     console.table(users);
-    console.table(videos);
+    console.table(thoughts);
     console.log('Successfully seeded');
     process.exit(0);
 });
-
-
-

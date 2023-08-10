@@ -1,5 +1,4 @@
-const dayJS = require('dayjs');
-
+const { User } = require('../models')
 const usernames = [
     'perfectly_beginning123',
     '_dripoutspoken_',
@@ -97,13 +96,17 @@ const possibleReactions = [
 
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const getRandomUsers = (int) => {
-    let friends = [];
-    for (let i = 0; i < int; i++){
-        friends.push(getRandomArrItem(usernames));
-    };
-    return friends;
-};
+// const getRandomUsers = (int) => {
+//     let friends = [];
+//     for (let i = 0; i < int; i++){
+//         let randomUser = getRandomArrItem(usernames);
+//         let isIncluded = friends.includes(randomUser);
+//         if (!isIncluded){
+//             friends.push(randomUser);
+//         };
+//     };
+//     return friends;
+// };
 
 const getUsers = () => {
     let users = [];
@@ -111,18 +114,22 @@ const getUsers = () => {
         users.push({
             username: usernames[i],
             email: emails[i],
-            friends: [...getRandomUsers(10)]
+            friends: [],
+            thoughts: []
         });
     };
     return users;
 };
 
+// need to find a way to get the id of a user into the friends list when their username is mentioned
+
 const getRandomThoughts = (int) => {
     let results = [];
     for (let i = 0; i < int; i++){
+        let randomUser = getRandomArrItem(usernames)
         results.push({
             thoughtText: getRandomArrItem(possibleThoughts),
-            username: getRandomArrItem(usernames),
+            username: randomUser,
             reactions: [...getRandomReact(3)]
         })
     }; 
