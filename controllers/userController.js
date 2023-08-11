@@ -5,9 +5,9 @@ module.exports = {
     async getUsers(req, res) {
         try {
             const users = await User.find();
-            // if (!users){
-            //     return res.status(404).json('Users not found')
-            // }
+            if (!users){
+                return res.status(404).json('Users not found')
+            }
             res.json(users);
         } catch (err) {
             res.status(500).json(err);
@@ -32,6 +32,7 @@ module.exports = {
             const newUser = await User.create(req.body);
             res.json(newUser);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         };
     },
@@ -70,8 +71,6 @@ module.exports = {
     // add friend to friends list
     async addFriend(req, res) {
         try {
-            // basically check if friend is already in friends list
-            // user.findone BY _id = userid; if user.friends x include friendId then add
             const newFriend = await User.findOneAndUpdate(
                 { _id: req.params.userId },
                 { $addToSet: { friends: req.params.friendId} },
