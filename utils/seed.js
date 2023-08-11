@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
-const { User, Thought } = require('../models');
-const { getUsers, getRandomThoughts } = require('./data');
+const { User } = require('../models');
+const { getUsers } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -17,14 +17,9 @@ connection.once('open', async () => {
     };
 
     const users = getUsers();
-    // const thoughts = getRandomThoughts(15);
 
     await User.collection.insertMany(users);
-    // await Thought.collection.insertMany(thoughts);
-    // create a single thought to get this shit started
 
-    // console.table(users);
-    // console.table(thoughts);
     console.log('Successfully seeded!');
     process.exit(0);
 });
